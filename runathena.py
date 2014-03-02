@@ -6,6 +6,7 @@ import os
 
 ATHENA="/Users/anjalitripathi/Atmospheric-Athena/bin/athena"
 CONFIGLOG="/Users/anjalitripathi/Atmospheric-Athena/config.log"
+problemfile = "/Users/anjalitripathi/Atmospheric-Athena/src/problem.c"
 
 # Inputs
 parser = argparse.ArgumentParser(description="Athinput and output directory names")
@@ -31,6 +32,7 @@ log_file = open(out_dir + "/" + LOG_NAME, "w+")
 #Run athena and copy input file to the output directory    
 call("cp %s %s" % (in_file, out_dir_long), shell=True )
 call("cp %s %s" % (CONFIGLOG, out_dir_long), shell=True )
+call("cp %s %s" % (problemfile, out_dir_long), shell=True )
 if args.mpi:
     mpinp = args.mpi
     call("mpirun -np %d %s -i %s -d %s" % (mpinp, ATHENA, in_file, out_dir), stdout=log_file, shell=True )
